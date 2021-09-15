@@ -133,14 +133,38 @@ void Aaron_shoots2(bool& B_alive, bool& C_alive){
 }
 
 void test_at_least_two_alive(void) {
-	cout << "Unit Testing 1: Function – at_least_two_alive()\n";
-	cout << "Case 1: Aaron alive, Bob alive, Charlie alive\n";
+	cout << "Unit Testing 1: Function - at_least_two_alive()\n";
+	cout << "\tCase 1: Aaron alive, Bob alive, Charlie alive\n";
 	assert(true == at_least_two_alive(true, true, true));
-	cout << "Case passed …\n";
-	cout << "Case 2: Aaron dead, Bob alive, Charlie alive\n";
+	cout << "\tCase passed ...\n";
+
+	cout << "\tCase 2: Aaron dead, Bob alive, Charlie alive\n";
 	assert(true == at_least_two_alive(false, true, true));
-	cout << "Case passed …\n";
-	/* add test cases 4-6 below */
+	cout << "\tCase passed ...\n";
+
+	cout << "\tCase 3: Aaron alive, Bob dead, Charlie alive\n";
+	assert(true == at_least_two_alive(true, false, true));
+	cout << "\tCase passed ...\n";
+
+	cout << "\tCase 4: Aaron alive, Bob alive, Charlie dead\n";
+	assert(false == at_least_two_alive(true, false, false));
+	cout << "\tCase passed ...\n";
+
+	cout << "\tCase 5: Aaron dead, Bob dead, Charlie alive\n";
+	assert(false == at_least_two_alive(false, false, true));
+	cout << "\tCase passed ...\n";
+
+	cout << "\tCase 6: Aaron dead, Bob alive, Charlie dead\n";
+	assert(false == at_least_two_alive(false, true, false));
+	cout << "\tCase passed ...\n";
+
+	cout << "\tCase 7: Aaron alive, Bob dead, Charlie dead\n";
+	assert(false == at_least_two_alive(true, false, false));
+	cout << "\tCase passed ...\n";
+
+	cout << "\tCase 8: Aaron dead, Bob dead, Charlie dead\n";
+	assert(false == at_least_two_alive(false, false, false));
+	cout << "\tCase passed ...\n";
 }
 
 int play_tournament(bool& A_alive, bool& B_alive, bool& C_alive){
@@ -202,7 +226,7 @@ int play_tournament_strat2(bool& A_alive, bool& B_alive, bool& C_alive){
 
 int main(int argc, char const *argv[])
 {
-	const int NUMBER_OF_RUNS = 100000;
+	const int NUMBER_OF_RUNS = 10000;
 	const bool RUN_UNIT_TESTS = true;
 	const bool PERSON_DEFAULT = true;
 
