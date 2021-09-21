@@ -34,23 +34,34 @@ void Aaron_shoots1(bool& B_alive, bool& C_alive){
 	* Return: Change B_alive into false if Bob is killed. 
 	* Change C_alive into false if Charlie is killed. 
 	*/
-	int shoot_target_result = rand()%3; //can  be 0, 1, 2
-	// 1/3 chance of a hit
-	if (shoot_target_result == 0) { 
-		//shoot at C if hes alive
-		if (C_alive){ 
+
+	// int shoot_target_result = rand()%3; //can  be 0, 1, 2
+	// // 1/3 chance of a hit
+	// if (shoot_target_result == 0) { 
+	// 	//shoot at C if hes alive
+	// 	if (C_alive){ 
+	// 		C_alive = false;
+	// 		// cout << "A killed C; ";
+	// 	}
+
+	// 	//otherwise shoot at B
+	// 	else { 
+	// 		B_alive = false;
+	// 		// cout << "A killed B; ";
+	// 	}
+	// }
+	// else{
+	// 	// cout << "A missed; ";
+	// }
+
+	if (C_alive){ 
 			C_alive = false;
 			// cout << "A killed C; ";
 		}
-
 		//otherwise shoot at B
-		else { 
-			B_alive = false;
-			// cout << "A killed B; ";
-		}
-	}
-	else{
-		// cout << "A missed; ";
+	else { 
+		B_alive = false;
+		// cout << "A killed B; ";
 	}
 }
 
@@ -61,23 +72,34 @@ void Bob_shoots(bool& A_alive, bool& C_alive){
 	* Return: Change A_alive into false if Aaron is killed. 
 	* Change C_alive into false if Charlie is killed. 
 	*/
-	int shoot_target_result = rand()%3; //can  be 0, 1,2
-	// 2/3 chance of a hit
-	if (shoot_target_result >= 1) { 
-		//shoot at C if hes alive
-		if (C_alive){ 
+	// int shoot_target_result = rand()%3; //can  be 0, 1,2
+	// // 2/3 chance of a hit
+	// if (shoot_target_result >= 1) { 
+	// 	//shoot at C if hes alive
+	// 	if (C_alive){ 
+	// 		C_alive = false;
+	// 		// cout << "B killed C; ";
+	// 	}
+
+	// 	//otherwise shoot at A
+	// 	else { 
+	// 		A_alive = false;
+	// 		// cout << "B killed A; ";
+	// 	}
+	// }
+	// else{
+	// 	// cout << "B missed; ";
+	// }
+
+	if (C_alive){ 
 			C_alive = false;
 			// cout << "B killed C; ";
 		}
 
 		//otherwise shoot at A
-		else { 
-			A_alive = false;
-			// cout << "B killed A; ";
-		}
-	}
-	else{
-		// cout << "B missed; ";
+	else { 
+		A_alive = false;
+		// cout << "B killed A; ";
 	}
 }
 
@@ -112,22 +134,36 @@ void Aaron_shoots2(bool& B_alive, bool& C_alive){
 	* Change C_alive into false if Charlie is killed. 
 	*/
 
-   if (B_alive && C_alive){
+//    if (B_alive && C_alive){
+// 	   return;
+//    }
+//    else {
+// 	   int shoot_target_result = rand()%3; //can  be 0, 1, 2
+// 	   // 1/3 chance of a hit
+// 	   if (shoot_target_result == 0) { 
+// 		   //shoot at C if hes alive
+// 			if (C_alive){ 
+// 				C_alive = false;
+// 			}
+
+// 			//otherwise shoot at B
+// 			else { 
+// 				B_alive = false;
+// 			}
+// 		}
+// 	}
+
+	if (B_alive && C_alive){
 	   return;
    }
    else {
-	   int shoot_target_result = rand()%3; //can  be 0, 1, 2
-	   // 1/3 chance of a hit
-	   if (shoot_target_result == 0) { 
-		   //shoot at C if hes alive
-			if (C_alive){ 
-				C_alive = false;
-			}
+		if (C_alive){ 
+			C_alive = false;
+		}
 
-			//otherwise shoot at B
-			else { 
-				B_alive = false;
-			}
+		//otherwise shoot at B
+		else { 
+			B_alive = false;
 		}
 	}
 }
@@ -168,12 +204,21 @@ void test_at_least_two_alive(void) {
 }
 
 int play_tournament(bool& A_alive, bool& B_alive, bool& C_alive){
+	int shoot_target_result = 0;
 	while (at_least_two_alive(A_alive,B_alive,C_alive)){
 		if (A_alive){
-			Aaron_shoots1(B_alive, C_alive);
+			int shoot_target_result = rand()%3; //can  be 0, 1, 2
+			// 1/3 chance of a hit
+			if (shoot_target_result == 0){
+				Aaron_shoots1(B_alive, C_alive);
+			}
 		}
 		if (B_alive){
-			Bob_shoots(A_alive, C_alive);
+			int shoot_target_result = rand()%3; //can  be 0, 1, 2
+			// 2/3 chance of a hit
+			if (shoot_target_result > 0){
+				Bob_shoots(A_alive, C_alive);
+			}
 		}
 		if (C_alive){
 			Charlie_shoots(A_alive, B_alive);
@@ -198,10 +243,18 @@ int play_tournament(bool& A_alive, bool& B_alive, bool& C_alive){
 int play_tournament_strat2(bool& A_alive, bool& B_alive, bool& C_alive){
 	while (at_least_two_alive(A_alive,B_alive,C_alive)){
 		if (A_alive){
-			Aaron_shoots2(B_alive, C_alive);
+			int shoot_target_result = rand()%3; //can  be 0, 1, 2
+			// 1/3 chance of a hit
+			if (shoot_target_result == 0){
+				Aaron_shoots2(B_alive, C_alive);
+			}
 		}
 		if (B_alive){
-			Bob_shoots(A_alive, C_alive);
+			int shoot_target_result = rand()%3; //can  be 0, 1, 2
+			// 2/3 chance of a hit
+			if (shoot_target_result > 0){
+				Bob_shoots(A_alive, C_alive);
+			}
 		}
 		if (C_alive){
 			Charlie_shoots(A_alive, B_alive);
