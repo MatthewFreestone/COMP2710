@@ -1,0 +1,58 @@
+*** Welcome to Freestone's Duel Simulator ***
+Unit Testing 1: Function - at_least_two_alive()
+	Case 1: Aaron alive, Bob alive, Charlie alive
+	Case passed ...
+	Case 2: Aaron dead, Bob alive, Charlie alive
+	Case passed ...
+	Case 3: Aaron alive, Bob dead, Charlie alive
+	Case passed ...
+	Case 4: Aaron alive, Bob alive, Charlie dead
+	Case passed ...
+	Case 5: Aaron dead, Bob dead, Charlie alive
+	Case passed ...
+	Case 6: Aaron dead, Bob alive, Charlie dead
+	Case passed ...
+	Case 7: Aaron alive, Bob dead, Charlie dead
+	Case passed ...
+	Case 8: Aaron dead, Bob dead, Charlie dead
+	Case passed ...
+Press any key to continue...Unit Testing 2: Function Aaron_shoots1(Bob_alive, Charlie_alive)
+	Case 1: Bob alive, Charlie alive
+		Aaron is shooting at Charlie
+	Case 2: Bob dead, Charlie alive
+		Aaron is shooting at Charlie
+	Case 3: Bob alive, Charlie dead
+		Aaron is shooting at Bob
+Press any key to continue...Unit Testing 3: Function Bob_shoots(Aaron_alive, Charlie_alive)
+	Case 1: Aaron alive, Charlie alive
+		Bob is shooting at Charlie
+	Case 2: Aaron dead, Charlie alive
+		Bob is shooting at Charlie
+	Case 3: Aaron alive, Charlie dead
+		Bob is shooting at Aaron
+Press any key to continue...Unit Testing 4: Function Charlie_shoots(Aaron_alive, Bob_alive)
+	Case 1: Aaron alive, Bob alive
+		Charlie is shooting at Bob
+	Case 2: Aaron dead, Bob alive
+		Charlie is shooting at Bob
+	Case 3: Aaron alive, Bob dead
+		Charlie is shooting at Aaron
+Press any key to continue...Unit Testing 5: Function Aaron_shoots1(Bob_alive, Charlie_alive)
+	Case 1: Bob alive, Charlie alive
+		Aaron intentionally misses his first shot
+Both Bob and Charlie are alive.
+	Case 2: Bob dead, Charlie alive
+		Aaron is shooting at Charlie
+	Case 3: Bob alive, Charlie dead
+		Aaron is shooting at Bob
+Press any key to continue...Ready to test strategy 1 (run 10000 times):
+Press any key to continue...Aaron won 3104/10000 duels or 31.04%
+Bob won 5380/10000 duels or 53.80%
+Charlie won 1516/10000 duels or 15.16%
+
+Ready to test strategy 2 (run 10000 times):
+Press any key to continue...Aaron won 4090/10000 duels or 40.90%
+Bob won 3747/10000 duels or 37.47%
+Charlie won 2163/10000 duels or 21.63%
+
+Strategy 2 is better than strategy 1.
