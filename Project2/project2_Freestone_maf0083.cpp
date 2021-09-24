@@ -1,8 +1,12 @@
-# include <iostream>
-# include <iomanip>
-# include <stdlib.h>
-# include <assert.h>
-# include <ctime>
+// Matthew Freestone, maf0083
+// project2_Freestone_maf0083.cpp 
+// g++ project2_Freestone_maf0083.cpp -o runme; ./runme
+// I used the function outlines given in the project2 description to structure my code.
+#include <iostream>
+#include <iomanip>
+#include <stdlib.h>
+#include <assert.h>
+#include <ctime>
 using namespace std;
 
 bool at_least_two_alive(bool A_alive, bool B_alive, bool C_alive){
@@ -107,6 +111,7 @@ void Aaron_shoots2(bool& B_alive, bool& C_alive){
 	}
 }
 
+//Unit test for at_least_two_alive
 void test_at_least_two_alive(void) {
 	cout << "Unit Testing 1: Function - at_least_two_alive()\n";
 	cout << "\tCase 1: Aaron alive, Bob alive, Charlie alive\n";
@@ -142,12 +147,14 @@ void test_at_least_two_alive(void) {
 	cout << "\tCase passed ...\n";
 }
 
+//Unit test for Aaron_shoots1
 void test_aaron_shoots1(){
 	bool b_alive = true;
 	bool c_alive = true;
 	cout << "Unit Testing 2: Function Aaron_shoots1(Bob_alive, Charlie_alive)\n";
 	cout << "\tCase 1: Bob alive, Charlie alive\n";
 	Aaron_shoots1(b_alive, c_alive);
+	assert(b_alive == true);
 	assert(c_alive == false);
 	cout << "\t\tAaron is shooting at Charlie\n";
 
@@ -155,6 +162,7 @@ void test_aaron_shoots1(){
 	c_alive = true;
 	cout << "\tCase 2: Bob dead, Charlie alive\n";
 	Aaron_shoots1(b_alive, c_alive);
+	assert(b_alive == false);
 	assert(c_alive == false);
 	cout << "\t\tAaron is shooting at Charlie\n";
 
@@ -163,9 +171,12 @@ void test_aaron_shoots1(){
 	cout << "\tCase 3: Bob alive, Charlie dead\n";
 	Aaron_shoots1(b_alive, c_alive);
 	assert(b_alive == false);
+	assert(c_alive == false);
 	cout << "\t\tAaron is shooting at Bob\n";
 }
 
+
+//Unit test for Bob_shoots
 void test_bob_shoots(){
 	bool a_alive = true;
 	bool c_alive = true;
@@ -173,6 +184,7 @@ void test_bob_shoots(){
 	cout << "\tCase 1: Aaron alive, Charlie alive\n";
 	Bob_shoots(a_alive, c_alive);
 	assert(c_alive == false);
+	assert(a_alive == true);
 	cout << "\t\tBob is shooting at Charlie\n";
 
 	a_alive = false;
@@ -180,6 +192,7 @@ void test_bob_shoots(){
 	cout << "\tCase 2: Aaron dead, Charlie alive\n";
 	Bob_shoots(a_alive, c_alive);
 	assert(c_alive == false);
+	assert(a_alive == false);
 	cout << "\t\tBob is shooting at Charlie\n";
 
 	a_alive = true;
@@ -187,9 +200,11 @@ void test_bob_shoots(){
 	cout << "\tCase 3: Aaron alive, Charlie dead\n";
 	Bob_shoots(a_alive, c_alive);
 	assert(a_alive == false);
+	assert(c_alive == false);
 	cout << "\t\tBob is shooting at Aaron\n";
 }
 
+//Unit test for Charlie_shoots
 void test_charlie_shoots(){
 	bool a_alive = true;
 	bool b_alive = true;
@@ -197,12 +212,14 @@ void test_charlie_shoots(){
 	cout << "\tCase 1: Aaron alive, Bob alive\n";
 	Charlie_shoots(a_alive, b_alive);
 	assert(b_alive == false);
+	assert(a_alive == true);
 	cout << "\t\tCharlie is shooting at Bob\n";
 
 	a_alive = false;
 	b_alive = true;
 	cout << "\tCase 2: Aaron dead, Bob alive\n";
 	Charlie_shoots(a_alive, b_alive);
+	assert(a_alive == false);
 	assert(b_alive == false);
 	cout << "\t\tCharlie is shooting at Bob\n";
 
@@ -211,33 +228,39 @@ void test_charlie_shoots(){
 	cout << "\tCase 3: Aaron alive, Bob dead\n";
 	Charlie_shoots(a_alive, b_alive);
 	assert(a_alive == false);
+	assert(b_alive == false);
 	cout << "\t\tCharlie is shooting at Aaron\n";
 }
 
+//Unit test for Aaron_shoots2
 void test_aaron_shoots2(){
 	bool b_alive = true;
 	bool c_alive = true;
 	cout << "Unit Testing 5: Function Aaron_shoots2(Bob_alive, Charlie_alive)\n";
 	cout << "\tCase 1: Bob alive, Charlie alive\n";
-	Aaron_shoots1(b_alive, c_alive);
-	assert(c_alive || b_alive == true);
-	cout << "\t\tAaron intentionally misses his first shot\nBoth Bob and Charlie are alive.\n";
+	Aaron_shoots2(b_alive, c_alive);
+	assert(c_alive && b_alive == true);
+	cout << "\t\tAaron intentionally misses his first shot\n";
+	cout << "\t\tBoth Bob and Charlie are alive.\n";
 
 	b_alive = false;
 	c_alive = true;
 	cout << "\tCase 2: Bob dead, Charlie alive\n";
-	Aaron_shoots1(b_alive, c_alive);
+	Aaron_shoots2(b_alive, c_alive);
 	assert(c_alive == false);
+	assert(b_alive == false);
 	cout << "\t\tAaron is shooting at Charlie\n";
 
 	b_alive = true;
 	c_alive = false;
 	cout << "\tCase 3: Bob alive, Charlie dead\n";
-	Aaron_shoots1(b_alive, c_alive);
+	Aaron_shoots2(b_alive, c_alive);
 	assert(b_alive == false);
+		assert(c_alive == false);
 	cout << "\t\tAaron is shooting at Bob\n";
 }
 
+// Tournament using Aaron_shoots1
 int play_tournament(bool& A_alive, bool& B_alive, bool& C_alive){
 	int shoot_target_result = 0;
 	while (at_least_two_alive(A_alive,B_alive,C_alive)){
@@ -260,21 +283,20 @@ int play_tournament(bool& A_alive, bool& B_alive, bool& C_alive){
 		}
 	}
 	if (A_alive){
-		// cout << "a won" << endl;
 		return 0;
 	}
 	if (B_alive){
-		// cout << "b won" << endl;
 		return 1;
 	}
 	if (C_alive){
-		// cout << "c won" << endl;
 		return 2;
 	}
 
 	//error
 	return -1;
 }
+
+// Tournament using Aaron_shoots2
 int play_tournament_strat2(bool& A_alive, bool& B_alive, bool& C_alive){
 	while (at_least_two_alive(A_alive,B_alive,C_alive)){
 		if (A_alive){
@@ -296,19 +318,16 @@ int play_tournament_strat2(bool& A_alive, bool& B_alive, bool& C_alive){
 		}
 	}
 	if (A_alive){
-		// cout << "a won" << endl;
 		return 0;
 	}
 	if (B_alive){
-		// cout << "b won" << endl;
 		return 1;
 	}
 	if (C_alive){
-		// cout << "c won" << endl;
 		return 2;
 	}
 
-	//error
+	//Error, this should never return 
 	return -1;
 }
 
@@ -358,9 +377,11 @@ int main(int argc, char const *argv[])
 		wins[winner]++;
 
 	}
+	//Calculuate win percentages for each player
 	double a_wins_percent_1 = ((double)wins[0]/NUMBER_OF_RUNS) * 100;
 	double b_wins_percent = ((double)wins[1]/NUMBER_OF_RUNS) * 100;
 	double c_wins_percent = ((double)wins[2]/NUMBER_OF_RUNS) * 100;
+
 	cout << setprecision(2) << fixed;
 	cout << "Aaron won " << wins[0] << "/" << NUMBER_OF_RUNS << " duels or " << a_wins_percent_1 << "%\n";
 	cout << "Bob won " << wins[1] << "/" << NUMBER_OF_RUNS << " duels or " << b_wins_percent << "%\n";
@@ -381,14 +402,17 @@ int main(int argc, char const *argv[])
 
 	}
 
+	//Calculuate win percentages for each player
 	double a_wins_percent_2 = ((double)wins[0]/NUMBER_OF_RUNS) * 100;
 	b_wins_percent = ((double)wins[1]/NUMBER_OF_RUNS) * 100;
 	c_wins_percent = ((double)wins[2]/NUMBER_OF_RUNS) * 100;
 	cout << setprecision(2) << fixed;
+
 	cout << "Aaron won " << wins[0] << "/" << NUMBER_OF_RUNS << " duels or " << a_wins_percent_2 << "%\n";
 	cout << "Bob won " << wins[1] << "/" << NUMBER_OF_RUNS << " duels or " << b_wins_percent << "%\n";
 	cout << "Charlie won " << wins[2] << "/" << NUMBER_OF_RUNS << " duels or " << c_wins_percent << "%\n\n";
 	
+	//compare aaron's win percentage from each strategy 
 	if (a_wins_percent_2 > a_wins_percent_1){
 		cout << "Strategy 2 is better than strategy 1.";
 	}

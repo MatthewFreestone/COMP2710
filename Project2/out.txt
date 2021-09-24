@@ -37,7 +37,7 @@ Press any key to continue...Unit Testing 4: Function Charlie_shoots(Aaron_alive,
 		Charlie is shooting at Bob
 	Case 3: Aaron alive, Bob dead
 		Charlie is shooting at Aaron
-Press any key to continue...Unit Testing 5: Function Aaron_shoots1(Bob_alive, Charlie_alive)
+Press any key to continue...Unit Testing 5: Function Aaron_shoots2(Bob_alive, Charlie_alive)
 	Case 1: Bob alive, Charlie alive
 		Aaron intentionally misses his first shot
 Both Bob and Charlie are alive.
@@ -46,13 +46,13 @@ Both Bob and Charlie are alive.
 	Case 3: Bob alive, Charlie dead
 		Aaron is shooting at Bob
 Press any key to continue...Ready to test strategy 1 (run 10000 times):
-Press any key to continue...Aaron won 3104/10000 duels or 31.04%
-Bob won 5380/10000 duels or 53.80%
-Charlie won 1516/10000 duels or 15.16%
+Press any key to continue...Aaron won 3072/10000 duels or 30.72%
+Bob won 5436/10000 duels or 54.36%
+Charlie won 1492/10000 duels or 14.92%
 
 Ready to test strategy 2 (run 10000 times):
-Press any key to continue...Aaron won 4090/10000 duels or 40.90%
-Bob won 3747/10000 duels or 37.47%
-Charlie won 2163/10000 duels or 21.63%
+Press any key to continue...Aaron won 3968/10000 duels or 39.68%
+Bob won 3855/10000 duels or 38.55%
+Charlie won 2177/10000 duels or 21.77%
 
 Strategy 2 is better than strategy 1.
