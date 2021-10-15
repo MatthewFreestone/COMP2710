@@ -1,3 +1,8 @@
+// Matthew Freestone, maf0083
+// project3_Freestone_maf0083.cpp 
+// g++ project3_Freestone_maf0083.cpp -o runme; ./runme
+// I used the function outlines given in the project3 description.
+// I used the https://softwareengineering.stackexchange.com/questions/318081/why-does-ifstream-eof-not-return-true-after-reading-the-last-line-of-a-file to properly read files.
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -5,9 +10,9 @@ using namespace std;
 
 const int MAX_SIZE = 500;
 
-int readfile(int inputArray[], ifstream& instream);
+int readFile(int inputArray[], ifstream& instream);
 int merge(int inputArray1[], int inputArray1_size, int inputArray2[], int inputArray2_size, int outputArray[]);
-void writefile(ofstream& outStream, int outputArray[], int outputArray_size);
+void writeFile(ofstream& outStream, int outputArray[], int outputArray_size);
 void printArray(int array[], int size, char separator); 
 bool checkFile(string filename);
 
@@ -34,7 +39,7 @@ int main(int argc, char const *argv[])
     }
 
     inStream.open(filename.c_str());
-    inArray1_size = readfile(inArray1, inStream);
+    inArray1_size = readFile(inArray1, inStream);
     inStream.close();
     cout << "The list of "<< inArray1_size <<" numbers in file "  << filename << " is: " << endl;
     printArray(inArray1, inArray1_size, '\n');
@@ -48,7 +53,7 @@ int main(int argc, char const *argv[])
     }
 
     inStream.open(filename.c_str());
-    inArray2_size = readfile(inArray2, inStream);
+    inArray2_size = readFile(inArray2, inStream);
     inStream.close();
     cout << "The list of "<< inArray2_size <<" numbers in file "  << filename << " is: " << endl;
     printArray(inArray2, inArray2_size, '\n');
@@ -63,21 +68,25 @@ int main(int argc, char const *argv[])
     cin >> out_filename;
 
     outStream.open(out_filename.c_str());
-    writefile(outStream, outArray, outArray_size);
+    writeFile(outStream, outArray, outArray_size);
     outStream.close();
 
     cout << "*** Please check the new file - " << out_filename << " ***\n*** Goodbye. ***";
     return 0;
 }
 
-int readfile(int inputArray[], ifstream& inStream)
+int readFile(int inputArray[], ifstream& inStream)
 {
     int index = 0;
     int value; 
-    while (inStream.good())
+    while (inStream >> value)
     {
-        inStream >> inputArray[index++];
+        inputArray[index++] = value;
     }
+    // while (inStream.good())
+    // {
+    //     inStream >> inputArray[index++];
+    // }
     return index;
 } 
 
@@ -111,7 +120,7 @@ int merge(int inputArray1[], int inputArray1_size, int inputArray2[], int inputA
     }
     return k;
 }
-void writefile(ofstream& outStream, int outputArray[], int outputArray_size)
+void writeFile(ofstream& outStream, int outputArray[], int outputArray_size)
 {
     for (int i = 0; i < outputArray_size; i++)
     {

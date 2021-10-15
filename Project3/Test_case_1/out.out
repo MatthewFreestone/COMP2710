@@ -16,7 +16,7 @@ The list of 5 numbers in file input2.txt is:
 14
 15
 
-The sorted list of 11numbers is: 3 4 7 9 13 14 14 15 17 23 89
+The sorted list of 11 numbers is: 3 4 7 9 13 14 14 15 17 23 89
 Enter the output file name: output.txt
 *** Please check the new file - output.txt ***
 *** Goodbye. ***
