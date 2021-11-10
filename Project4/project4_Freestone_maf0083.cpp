@@ -1,3 +1,7 @@
+// Matthew Freestone, maf0083
+// project4_Freestone_maf0083.cpp 
+// g++ project4_Freestone_maf0083.cpp -o runme; ./runme
+// I used the hints file for definition of 2 versions
 #include<string>
 #include<iostream>
 // #define UNIT_TESTING
@@ -16,7 +20,32 @@ int askQuestions(TriviaNode*, int);
 int questionsInLL = 0;
 #ifdef UNIT_TESTING
 int main(int argc, char const *argv[])
-{}
+{
+    TriviaNode* head;
+    head = initQuestionList();
+    cout << "*** This is a debugging version ***" << endl;
+    cout << "Unit Test Case 1: Ask no question. The program should give a warning message. " << endl;
+    askQuestions(head, 0);
+    cout << "Case 1 Passed\n\n";
+
+    cout << "Unit Test Case 2.1: Ask 1 question in the linked list. The tester enters an incorrect answer." << endl;
+    askQuestions(head,1);
+    cout << "Case 2.1 Passed\n\n";
+    
+    cout << "Unit Test Case 2.2: Ask 1 question in the linked list. The tester enters a correct answer." << endl;
+    askQuestions(head,1);
+    cout << "Case 2.2 Passed\n\n";
+    
+    cout << "Unit Test Case 3: Ask all the questions of the last trivia in the linked list." << endl;
+    askQuestions(head,questionsInLL);
+    cout << "Case 3 Passed\n\n";
+
+    cout << "Unit Test Case 4: Ask 5 questions in the linked list." << endl;
+    askQuestions(head,5);
+    cout << "Case 4 Passed\n\n";
+
+    cout << "** End of the Debugging Version ***" << endl;
+}
 #else
 int main(int argc, char const *argv[])
 {
@@ -25,8 +54,13 @@ int main(int argc, char const *argv[])
 
     cout << "*** Welcome to Freestone's trivia quiz game ***" << endl;
 
-    string cont;
+    string cont = "Yes";
     do{
+        if (cont != "Yes"){
+            cout << "Invalid response, enter Yes or No: ";
+            cin >> cont; 
+            cin.ignore(100, '\n');
+        }
         getNewQuestion(head);
 
         cout << "Continue? (Yes/No): ";
@@ -35,7 +69,6 @@ int main(int argc, char const *argv[])
     }
     while(cont != "No");
     cout << endl;
-    // cin.ignore(100, '\n');
     
     int totalpts = 0;
     TriviaNode* n = head;
@@ -80,7 +113,7 @@ int askQuestions(TriviaNode* n, int numQ){
         else{
             cout << "Your answer is wrong. The correct answer is " << n->answer << endl;
         }
-        cout << "Your Total points: " << totalpts << "\n\n";
+        cout << "Your total points: " << totalpts << "\n\n";
 
         n = n->next;
     }
@@ -96,6 +129,12 @@ void getNewQuestion(TriviaNode* head){
     getline(cin, a);
     cout << "Enter award points: ";
     cin >> p;
+    while (cin.fail()){
+        cout << "Please enter a number: ";
+        cin.clear();
+        cin.ignore(100, '\n');
+        cin >> p; 
+    }
     TriviaNode* n = head;
     while (n->next){
         n = n->next;
