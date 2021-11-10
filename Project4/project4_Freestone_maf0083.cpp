@@ -4,7 +4,7 @@
 // I used the hints file for definition of 2 versions
 #include<string>
 #include<iostream>
-// #define UNIT_TESTING
+#define UNIT_TESTING
 using namespace std;
 struct TriviaNode
 {
@@ -146,6 +146,6 @@ TriviaNode::TriviaNode(string question, string answer, int worth){
     this->question = question;
     this->answer = answer;
     this->worth = worth;
-    this->next = nullptr;
+    this->next = NULL;
     questionsInLL++;
 }
