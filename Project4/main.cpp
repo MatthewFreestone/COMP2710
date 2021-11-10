@@ -12,7 +12,8 @@ struct TriviaNode
 };
 TriviaNode* initQuestionList();
 void getNewQuestion(TriviaNode*);
-bool askQuestion(TriviaNode*);
+int askQuestions(TriviaNode*, int);
+int questionsInLL = 0;
 #ifdef UNIT_TESTING
 int main(int argc, char const *argv[])
 {}
@@ -23,29 +24,22 @@ int main(int argc, char const *argv[])
     head = initQuestionList();
 
     cout << "*** Welcome to Freestone's trivia quiz game ***" << endl;
-    while(true){
+
+    string cont;
+    do{
         getNewQuestion(head);
-        string cont;
+
         cout << "Continue? (Yes/No): ";
         cin >> cont;
-        if (cont == "Yes"){
-            continue;
-        }
-        else{
-            break;
-        }
+        cin.ignore(100, '\n');
     }
+    while(cont != "No");
     cout << endl;
+    // cin.ignore(100, '\n');
     
     int totalpts = 0;
     TriviaNode* n = head;
-    while (n){
-        if (askQuestion(n)){
-            totalpts += n->worth;
-        }
-        n = n->next;
-        cout << "Your Total points: " << totalpts << endl << endl;
-    }
+    askQuestions(n, questionsInLL);
     cout << "*** Thank you for playing the trivia quiz game. Goodbye! ***" << endl;
     return 0;
 }
@@ -58,17 +52,39 @@ TriviaNode* initQuestionList(){
     return head;
 }
 
-bool askQuestion(TriviaNode* n){
-    cout << "Question: " << n->question << endl;
-    string ans;
-    cout << "Answer: ";
-    getline(cin, ans);
-    if (ans == n->answer){
-        cout << "Your answer is correct! You receive " << n->worth <<" points." << endl;
-        return true;
+int askQuestions(TriviaNode* n, int numQ){
+    if (!n){
+        cout << "No question list!" << endl;
+        return 1;
     }
-    cout << "Your answer is wrong. The correct answer is " << n->answer << endl;
-    return false; 
+    if (numQ < 1){
+        cout << "Warning - the number of trivia to be asked must equal to or be larger than 1." << endl;
+        return 1; 
+    } 
+    if (numQ > questionsInLL){
+        cout << "Warning - There is only "<< questionsInLL << " trivia in the list." << endl;
+        return 1;
+    }
+
+
+    int totalpts = 0;
+    for (int i = 0; i<numQ && n; i++) {
+        cout << "Question: " << n->question << endl;
+        string ans;
+        cout << "Answer: ";
+        getline(cin, ans);
+        if (ans == n->answer){
+            cout << "Your answer is correct! You receive " << n->worth <<" points." << endl;
+            totalpts += n->worth;
+        }
+        else{
+            cout << "Your answer is wrong. The correct answer is " << n->answer << endl;
+        }
+        cout << "Your Total points: " << totalpts << "\n\n";
+
+        n = n->next;
+    }
+    return 0;
 }
 
 void getNewQuestion(TriviaNode* head){
@@ -88,8 +104,9 @@ void getNewQuestion(TriviaNode* head){
 }
 
 TriviaNode::TriviaNode(string question, string answer, int worth){
-        this->question = question;
-        this->answer = answer;
-        this->worth = worth;
-        this->next = nullptr;
-    }
+    this->question = question;
+    this->answer = answer;
+    this->worth = worth;
+    this->next = nullptr;
+    questionsInLL++;
+}
